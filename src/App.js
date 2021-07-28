@@ -14,13 +14,7 @@ function App() {
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
-          setQuery("");
-        });
-    } else {
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then((res) => res.json())
-        .then((result) => {
-          setWeather(result);
+          console.log(result);
           setQuery("");
         });
     }
@@ -62,7 +56,7 @@ function App() {
   return (
     <div
       className={
-        typeof weather.main != "undefined"
+        typeof weather.main !== "undefined"
           ? weather.main.temp > 16
             ? "app warm"
             : "app"
@@ -80,7 +74,7 @@ function App() {
             onKeyPress={search}
           />
         </div>
-        {typeof weather.main != "undefined" ? (
+        {typeof weather.main !== "undefined" ? (
           <div>
             <div className="location-box">
               <div className="location">
@@ -90,11 +84,20 @@ function App() {
             </div>
             <div className="weather-box">
               <div className="temp">{Math.round(weather.main.temp)}°c</div>
-              <div className="weather">{weather.weather[0].main}</div>
+              <div className="weather">{weather.weather[0].description}</div>
             </div>
           </div>
         ) : (
-          ""
+          <div>
+            <div className="location-box">
+              <div className="location">Location</div>
+              <div className="date">{dateBuilder(new Date())}</div>
+            </div>
+            <div className="weather-box">
+              <div className="temp">T°c</div>
+              <div className="weather">Description</div>
+            </div>
+          </div>
         )}
       </main>
     </div>
