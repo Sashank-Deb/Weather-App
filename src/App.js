@@ -14,9 +14,20 @@ function App() {
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
+          const lon=result.coord.lon;
+          const lat=result.coord.lat;
+          console.log(lon);console.log(lat);
           console.log(result);
           setQuery("");
+          fetch(`${api.base}onecall?lat=${lat}&lon=${lon}&exclude={minutely}&units=metric&APPID=${api.key}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setWeather(data);
+            console.log(data);
+            setQuery("");
+          });
         });
+      
     }
   };
 
@@ -84,7 +95,8 @@ function App() {
             </div>
             <div className="weather-box">
               <div className="temp">{Math.round(weather.main.temp)}°c</div>
-              <div className="weather">{weather.weather[0].description}</div>
+              <div className="weather">{weather.weather[0].main}</div>
+              
             </div>
           </div>
         ) : (
