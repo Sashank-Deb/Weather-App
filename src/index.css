@@ -9,19 +9,32 @@ body {
 }
 
 .app {
-  background-image: url('https://i.imgur.com/sZUZimV.jpg');
+  background: #e5e5e5;
   background-size: cover;
   background-position: bottom;
   transition: 0.4 ease;
+  overflow-x: hidden; 
 }
 
 .app.warm {
-  background-image: url('https://i.imgur.com/H5antBl.jpg');
+  background: #191919;
 }
 
+.sun{
+  width: 200%;
+  margin-top: -150%;
+  margin-left: -50%;
+  padding-bottom: 5%;
+}
+.sun1{
+  display: none;
+}
+.st0{fill:#FFE4AE;}
+.st1{fill:#FFC75B;}
+.st2{fill:#FFB015;}
 main {
   min-height: 100vh;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75));
+  
   padding: 25px;
 }
 
@@ -34,21 +47,17 @@ main {
   display: block;
   width: 100%;
   padding: 15px;
-
   appearance: none;
   background: none;
+  text-align: center;
   border: none;
   outline: none;
-
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 0px 0px 16px 16px;
-  margin-top: -25px;
-
-  box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
-  
+  background-color: #191919;
+  border-radius: 20px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
   color: #313131;
-  font-size: 20px;
-
+  font-size: 15px;
   transition: 0.4s ease;
 }
 
