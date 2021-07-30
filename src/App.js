@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import bgblack from "./bgblack.svg";
 const api = {
-  key: "6b7fbd09a0ee11b5a5016349e373d0d4",
+  key: "e72904ae768cb10890bd228d2f225dd2",
   base: "https://api.openweathermap.org/data/2.5/"
 };
 
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
+  const [daily, setDaily] = useState({});
 
   const search = (evt) => {
     if (evt.key === "Enter") {
@@ -14,20 +16,24 @@ function App() {
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
-          const lon=result.coord.lon;
-          const lat=result.coord.lat;
-          console.log(lon);console.log(lat);
           console.log(result);
-          setQuery("");
-          fetch(`${api.base}onecall?lat=${lat}&lon=${lon}&exclude={minutely}&units=metric&APPID=${api.key}`)
-          .then((res) => res.json())
-          .then((data) => {
-            setWeather(data);
-            console.log(data);
+          const image = result.weather[0].icon;
+          console.log(image);
+          if (result.cod !== "404") {
+            const lon = result.coord.lon;
+            const lat = result.coord.lat;
+            console.log(lon);
+            console.log(lat);
             setQuery("");
-          });
+            fetch(
+              `${api.base}onecall?lat=${lat}&lon=${lon}&exclude={minutely}&units=metric&APPID=${api.key}`
+            )
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+              });
+          }
         });
-      
     }
   };
 
@@ -68,7 +74,7 @@ function App() {
     <div
       className={
         typeof weather.main !== "undefined"
-          ? weather.main.temp > 16
+          ? weather.main.temp > 20
             ? "app warm"
             : "app"
           : "app"
@@ -96,7 +102,16 @@ function App() {
             <div className="weather-box">
               <div className="temp">{Math.round(weather.main.temp)}°c</div>
               <div className="weather">{weather.weather[0].main}</div>
-              
+              <div className="weather">
+                <img
+                  src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                  alt="icon"
+                  className="w-icon"
+                ></img>
+              </div>
+              <div className="bg">
+                <img src={bgblack} alt="bgblack"></img>
+              </div>
             </div>
           </div>
         ) : (
