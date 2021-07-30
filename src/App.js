@@ -5,6 +5,7 @@ const api = {
   base: "https://api.openweathermap.org/data/2.5/"
 };
 
+
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
@@ -69,7 +70,7 @@ function App() {
 
     return `${day} ${date} ${month} ${year}`;
   };
-
+ds
   return (
     <div
       className={
