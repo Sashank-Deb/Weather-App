@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import bgblack from "./bgblack.svg";
+import sun from "./sun.svg";
 const api = {
   key: "e72904ae768cb10890bd228d2f225dd2",
   base: "https://api.openweathermap.org/data/2.5/"
@@ -70,8 +71,9 @@ function App() {
 
     return `${day} ${date} ${month} ${year}`;
   };
-ds
+
   return (
+    
     <div
       className={
         typeof weather.main !== "undefined"
@@ -81,12 +83,23 @@ ds
           : "app"
       }
     >
+      <img src={sun} alt="sunicon" className="sun1"></img>
+      #display none#
+      <div className="App">
+      <svg  version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" viewBox="0 0 940 940" className="sun">
+      <g>
+	        <circle  class="st0" cx="470" cy="470" r="470"/>
+	        <circle  class="st1" cx="470" cy="470" r="417.8"/>
+	        <circle  class="st2" cx="470" cy="470" r="365.6"/>
+    </g>
+      </svg>
+    </div>
       <main>
         <div className="search-box">
           <input
             type="text"
             className="search-bar"
-            placeholder="Search..."
+            placeholder="Search your Location"
             onChange={(e) => setQuery(e.target.value)}
             value={query}
             onKeyPress={search}
@@ -111,7 +124,7 @@ ds
                 ></img>
               </div>
               <div className="bg">
-                <img src={bgblack} alt="bgblack"></img>
+                <img src={bgblack} alt="bgblack" className="hello"></img>
               </div>
             </div>
           </div>
