@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import sun from "./sun.svg";
+// import { Line } from 'react-chartjs-2';
 const api = {
   key: "e72904ae768cb10890bd228d2f225dd2",
   base: "https://api.openweathermap.org/data/2.5/"
@@ -9,6 +10,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
   const [daily, setDaily] = useState({});
+  // const [data, setData] = useState({});
 
   const search = (evt) => {
     if (evt.key === "Enter") {
@@ -24,10 +26,22 @@ function App() {
             fetch(
               `${api.base}onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&APPID=${api.key}`
             )
-              .then((data) => data.json())
-              .then((data) => {
-                setDaily(data);
-                console.log("Onecall API is:", data);
+              .then((data1) => data1.json())
+              .then((data1) => {
+                setDaily(data1);
+                console.log("Onecall API is:", data1);
+
+                //   const data = {
+                //     labels: ['07h','09h','11h','13h','15h','17h'],
+                //     datasets: [{
+                //     label: 'My First Dataset',
+                //     backgroundColor: ['rgba(255, 159, 64, 0.2)'],
+                //     borderColor: ['rgb(255, 99, 132)'],
+                //     borderWidth: 3,
+                //     data: [daily.hourly[7].temp, daily.hourly[9].temp, daily.hourly[11].temp, daily.hourly[13].temp, daily.hourly[15].temp, daily.hourly[17].temp, daily.hourly[19].temp]
+                //   }]
+                // }
+                // setData(data);
               });
           }
           setWeather(result);
@@ -142,6 +156,7 @@ function App() {
     let day6 = days[day];
     return `${day6}`;
   };
+
   return (
     <div
       className={
@@ -205,144 +220,162 @@ function App() {
                 </div>
 
                 {typeof weather.main !== "undefined" ? (
-                  <div className="locationtext">
-                    {weather.name}, {weather.sys.country}
+                  <div>
+                    <div className="locationtext">
+                      {weather.name}, {weather.sys.country}
+                    </div>
+                    <div className="weather-box">
+                      <div className="minmax">
+                        {Math.round(daily.daily[0].temp.min)}
+                        {"°"} | {Math.round(daily.daily[0].temp.max)}
+                        {"°"}
+                      </div>
+                      <div className="temp">
+                        {Math.round(daily.current.temp)}
+                        {"°"}
+                      </div>
+                      <div className="weather">
+                        {daily.current.weather[0].description
+                          .charAt(0)
+                          .toUpperCase() +
+                          daily.current.weather[0].description.slice(1)}
+                      </div>
+                    </div>
+
+                    <div className="weatherfooter">
+                      <div className="weatherdetailsicon">
+                        <img
+                          src={`https://openweathermap.org/img/wn/${daily.current.weather[0].icon}@2x.png`}
+                          alt="icon"
+                          className="w-icon"
+                        ></img>
+                      </div>
+                      <div className="weatherdetails">
+                        {daily.current.humidity}% | UV{" "}
+                        {Math.round(daily.current.uvi)}
+                      </div>
+                    </div>
+
+                    {/* <div id="chart">
+                      <Line data= {data}></Line>
+                        </div> */}
+
+                    <div className="week">
+                      <div className="weekbar">
+                        <div className="day">{dateBuilder1(new Date())}</div>
+                        <img
+                          src={`https://openweathermap.org/img/wn/${daily.daily[1].weather[0].icon}@2x.png`}
+                          alt="icon"
+                          className="week-icon"
+                        ></img>
+                        <div className="max">
+                          {Math.round(daily.daily[1].temp.max)}
+                          {"°"}
+                        </div>
+                        <div className="min">
+                          {Math.round(daily.daily[1].temp.min)}
+                          {"°"}
+                        </div>
+                      </div>
+                      <div className="weekbar">
+                        <div className="day">{dateBuilder2(new Date())}</div>
+                        <img
+                          src={`https://openweathermap.org/img/wn/${daily.daily[2].weather[0].icon}@2x.png`}
+                          alt="icon"
+                          className="week-icon"
+                        ></img>
+                        <div className="max">
+                          {Math.round(daily.daily[2].temp.max)}
+                          {"°"}
+                        </div>
+                        <div className="min">
+                          {Math.round(daily.daily[2].temp.min)}
+                          {"°"}
+                        </div>
+                      </div>
+                      <div className="weekbar">
+                        <div className="day">{dateBuilder3(new Date())}</div>
+                        <img
+                          src={`https://openweathermap.org/img/wn/${daily.daily[3].weather[0].icon}@2x.png`}
+                          alt="icon"
+                          className="week-icon"
+                        ></img>
+                        <div className="max">
+                          {Math.round(daily.daily[3].temp.max)}
+                          {"°"}
+                        </div>
+                        <div className="min">
+                          {Math.round(daily.daily[3].temp.min)}
+                          {"°"}
+                        </div>
+                      </div>
+                      <div className="weekbar">
+                        <div className="day">{dateBuilder4(new Date())}</div>
+                        <img
+                          src={`https://openweathermap.org/img/wn/${daily.daily[4].weather[0].icon}@2x.png`}
+                          alt="icon"
+                          className="week-icon"
+                        ></img>
+                        <div className="max">
+                          {Math.round(daily.daily[4].temp.max)}
+                          {"°"}
+                        </div>
+                        <div className="min">
+                          {Math.round(daily.daily[4].temp.min)}
+                          {"°"}
+                        </div>
+                      </div>
+                      <div className="weekbar">
+                        <div className="day">{dateBuilder5(new Date())}</div>
+                        <img
+                          src={`https://openweathermap.org/img/wn/${daily.daily[5].weather[0].icon}@2x.png`}
+                          alt="icon"
+                          className="week-icon"
+                        ></img>
+                        <div className="max">
+                          {Math.round(daily.daily[5].temp.max)}
+                          {"°"}
+                        </div>
+                        <div className="min">
+                          {Math.round(daily.daily[5].temp.min)}
+                          {"°"}
+                        </div>
+                      </div>
+                      <div className="weekbar">
+                        <div className="day">{dateBuilder6(new Date())}</div>
+                        <img
+                          src={`https://openweathermap.org/img/wn/${daily.daily[6].weather[0].icon}@2x.png`}
+                          alt="icon"
+                          className="week-icon"
+                        ></img>
+                        <div className="max">
+                          {Math.round(daily.daily[6].temp.max)}
+                          {"°"}
+                        </div>
+                        <div className="min">
+                          {Math.round(daily.daily[6].temp.min)}
+                          {"°"}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="footer">
+                      Powered by One weather <br />
+                      Copyright © 2021 Sashank Deb
+                    </div>
                   </div>
                 ) : (
-                  <div>HelloWorld</div>
+                  <div>
+                    <div>This city doesn't exsist</div>
+                    <div>
+                      <div className="weather-box">
+                        <div className="temp">T°c</div>
+                        <div className="weather">Description</div>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
-            </div>
-            <div className="weather-box">
-              <div className="minmax">
-                {Math.round(daily.daily[0].temp.min)}
-                {"°"} | {Math.round(daily.daily[0].temp.max)}
-                {"°"}
-              </div>
-              <div className="temp">
-                {Math.round(daily.current.temp)}
-                {"°"}
-              </div>
-              <div className="weather">
-                {daily.current.weather[0].description.charAt(0).toUpperCase() +
-                  daily.current.weather[0].description.slice(1)}
-              </div>
-            </div>
-
-            <div className="weatherfooter">
-              <div className="weatherdetailsicon">
-                <img
-                  src={`https://openweathermap.org/img/wn/${daily.current.weather[0].icon}@2x.png`}
-                  alt="icon"
-                  className="w-icon"
-                ></img>
-              </div>
-              <div className="weatherdetails">
-                {daily.current.humidity}% | UV {Math.round(daily.current.uvi)}
-              </div>
-            </div>
-
-            <div className="week">
-              <div className="weekbar">
-                <div className="day">{dateBuilder1(new Date())}</div>
-                <img
-                  src={`https://openweathermap.org/img/wn/${daily.daily[1].weather[0].icon}@2x.png`}
-                  alt="icon"
-                  className="week-icon"
-                ></img>
-                <div className="max">
-                  {Math.round(daily.daily[1].temp.max)}
-                  {"°"}
-                </div>
-                <div className="min">
-                  {Math.round(daily.daily[1].temp.min)}
-                  {"°"}
-                </div>
-              </div>
-              <div className="weekbar">
-                <div className="day">{dateBuilder2(new Date())}</div>
-                <img
-                  src={`https://openweathermap.org/img/wn/${daily.daily[2].weather[0].icon}@2x.png`}
-                  alt="icon"
-                  className="week-icon"
-                ></img>
-                <div className="max">
-                  {Math.round(daily.daily[2].temp.max)}
-                  {"°"}
-                </div>
-                <div className="min">
-                  {Math.round(daily.daily[2].temp.min)}
-                  {"°"}
-                </div>
-              </div>
-              <div className="weekbar">
-                <div className="day">{dateBuilder3(new Date())}</div>
-                <img
-                  src={`https://openweathermap.org/img/wn/${daily.daily[3].weather[0].icon}@2x.png`}
-                  alt="icon"
-                  className="week-icon"
-                ></img>
-                <div className="max">
-                  {Math.round(daily.daily[3].temp.max)}
-                  {"°"}
-                </div>
-                <div className="min">
-                  {Math.round(daily.daily[3].temp.min)}
-                  {"°"}
-                </div>
-              </div>
-              <div className="weekbar">
-                <div className="day">{dateBuilder4(new Date())}</div>
-                <img
-                  src={`https://openweathermap.org/img/wn/${daily.daily[4].weather[0].icon}@2x.png`}
-                  alt="icon"
-                  className="week-icon"
-                ></img>
-                <div className="max">
-                  {Math.round(daily.daily[4].temp.max)}
-                  {"°"}
-                </div>
-                <div className="min">
-                  {Math.round(daily.daily[4].temp.min)}
-                  {"°"}
-                </div>
-              </div>
-              <div className="weekbar">
-                <div className="day">{dateBuilder5(new Date())}</div>
-                <img
-                  src={`https://openweathermap.org/img/wn/${daily.daily[5].weather[0].icon}@2x.png`}
-                  alt="icon"
-                  className="week-icon"
-                ></img>
-                <div className="max">
-                  {Math.round(daily.daily[5].temp.max)}
-                  {"°"}
-                </div>
-                <div className="min">
-                  {Math.round(daily.daily[5].temp.min)}
-                  {"°"}
-                </div>
-              </div>
-              <div className="weekbar">
-                <div className="day">{dateBuilder6(new Date())}</div>
-                <img
-                  src={`https://openweathermap.org/img/wn/${daily.daily[6].weather[0].icon}@2x.png`}
-                  alt="icon"
-                  className="week-icon"
-                ></img>
-                <div className="max">
-                  {Math.round(daily.daily[6].temp.max)}
-                  {"°"}
-                </div>
-                <div className="min">
-                  {Math.round(daily.daily[6].temp.min)}
-                  {"°"}
-                </div>
-              </div>
-            </div>
-            <div className="footer">
-              Powered by One weather <br />
-              Copyright © 2021 Sashank Deb
             </div>
           </div>
         ) : (
