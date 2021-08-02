@@ -40,10 +40,10 @@ function App() {
                       backgroundColor: ["rgba(0,122,255,0.2)"],
                       borderColor: ["rgb(0,122,255)"],
                       borderWidth: 3,
-                      pointRadius: 5,
+                      pointRadius: 6,
                       pointBackgroundColor: ["rgba(0,122,255,1)"],
-                      pointBorderColor: ["rgba(0,122,255,0)"],
-                      pointBorderWidth: 10,
+                      pointBorderColor: ["rgba(0,122,255,0.2)"],
+                      pointBorderWidth: 5,
                       data: [
                         result1.hourly[7].temp,
                         result1.hourly[9].temp,
