@@ -172,7 +172,6 @@ input:focus::placeholder {
   font-size: 13px;
   font-weight: 600;
   background: #191919;
-  padding: 20px 0px;
   border-radius: 20px;
 }
 .day,
@@ -188,6 +187,12 @@ input:focus::placeholder {
 }
 .weekbar {
   display: grid;
+  transition: 0.6s ease;
+  padding: 20px 0px;
+}
+.weekbar:hover {
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.7);
 }
 .week-icon {
   display: block;
