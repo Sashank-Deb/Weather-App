@@ -42,7 +42,8 @@ function App() {
                       borderWidth: 3,
                       pointRadius: 5,
                       pointBackgroundColor: ["rgba(0,122,255,1)"],
-                      pointBorderColor: ["rgb(0,122,255)"],
+                      pointBorderColor: ["rgba(0,122,255,0)"],
+                      pointBorderWidth: 10,
                       data: [
                         result1.hourly[7].temp,
                         result1.hourly[9].temp,
