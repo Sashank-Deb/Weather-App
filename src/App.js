@@ -40,6 +40,7 @@ function App() {
                       backgroundColor: ["rgba(0,122,255,0.2)"],
                       borderColor: ["rgb(0,122,255)"],
                       borderWidth: 3,
+                      pointRadius: 5,
                       pointBackgroundColor: ["rgba(0,122,255,1)"],
                       pointBorderColor: ["rgb(0,122,255)"],
                       data: [
