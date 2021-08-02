@@ -6,7 +6,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap');
+  src: url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap");
   background: #191919;
 }
 
@@ -16,22 +16,34 @@ body {
   background-position: bottom;
   transition: 0.4 ease;
   overflow-x: hidden;
-}
-
-.app.warm {
   background: #191919;
 }
 
 .sun {
   width: 200%;
-  margin-top: -150%;
+  margin-top: -130%;
   margin-left: -50%;
-  filter: drop-shadow(0px 10px 7px rgb( 0 0 0 / 0.9));
+  filter: drop-shadow(0px 10px 7px rgb(0 0 0 / 0.9));
+}
+.dark {
+  width: 200%;
+  margin-top: -130%;
+  margin-left: -55%;
+  filter: drop-shadow(0px 10px 7px rgb(0 0 0 / 0.9));
+}
+.cloud {
+  width: 200%;
+  margin-top: -130%;
+  margin-left: -50%;
+  filter: drop-shadow(0px 10px 7px rgb(0 0 0 / 0.9));
+}
+.rain {
+  width: 200%;
+  margin-top: -130%;
+  margin-left: -25%;
+  filter: drop-shadow(0px 10px 7px rgb(0 0 0 / 0.9));
 }
 
-.sun1 {
-  display: none;
-}
 .st0 {
   fill: #ffe4ae;
 }
@@ -44,11 +56,12 @@ body {
 main {
   min-height: 90vh;
   padding: 25px;
+  padding-top: 0px;
 }
 
 .search-box {
   width: 100%;
-  margin: 0 0 10px;
+  margin: 10px 0px;
 }
 
 .search-box .search-bar {
@@ -57,7 +70,7 @@ main {
   padding: 15px;
   appearance: none;
   background: none;
-  text-align: center;
+  text-align: left;
   border: none;
   outline: none;
   background-color: #292929;
@@ -84,39 +97,40 @@ input:focus::placeholder {
   font-size: 13px;
   font-weight: 700;
   text-align: left;
-  padding: 5px 15px;
+  padding: 5px 0px;
   border-radius: 20px;
 }
 .direction .arrow {
   float: left;
   margin-right: 5px;
+  margin-left: 15px;
 }
 .date {
   color: #fff;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
+  opacity: 0.1;
   text-align: center;
-  opacity: 0.5;
-  position: absolute;
+  margin-top: 25px;
   width: 100%;
-  top: 40px;
 }
-
 
 .weather-box {
   text-align: center;
   margin-top: 50px;
 }
-.minmax{
+.minmax {
   color: #fff;
   font-size: 13px;
   font-weight: 600;
   opacity: 0.9;
+  margin-left: 10px;
 }
 .temp {
   color: #fff;
   font-size: 60px;
   font-weight: 600;
+  margin-left: 20px;
 }
 
 .weather {
@@ -125,57 +139,63 @@ input:focus::placeholder {
   font-weight: 600;
   opacity: 0.9;
 }
-.weatherfooter{
+.weatherfooter {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: -30px;
-  margin-top: -5px;
+  margin-top: 5px;
   opacity: 0.9;
 }
 .weatherfooter .weatherdetails {
   color: white;
   font-size: 13px;
   font-weight: 600;
-  text-align: left;
-  padding: 0px 0px;
+  padding: 0px 5px;
   border-radius: 20px;
 }
-.weatherfooter .weatherdetailsicon {
-  width: 45px;
-}
-.w-icon{
+
+.w-icon {
   width: 100%;
   float: left;
 }
-.week{
-  margin-top: 170px;
+
+.chart {
+  margin-top: 40px;
+}
+
+.week {
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   text-align: center;
   color: white;
   font-size: 13px;
   font-weight: 600;
+  background: #191919;
+  padding: 20px 0px;
+  border-radius: 20px;
 }
-.day, .max{
+.day,
+.max {
   opacity: 0.8;
 }
-.min{
+.min {
   opacity: 0.2;
 }
-.max, .min{
-  padding:3px;
+.max,
+.min {
+  padding: 3px;
 }
-.weekbar{
-  display:grid;
+.weekbar {
+  display: grid;
 }
-.week-icon{
-  display:block;
+.week-icon {
+  display: block;
   margin: 0px auto;
   width: 80%;
 }
-.footer{
-  margin-top: 50px;
+.footer {
+  margin-top: 10px;
   text-align: center;
   color: white;
   font-size: 13px;
