@@ -73,10 +73,15 @@ function App() {
   };
 
   const options = {
+    responsive: true,
     plugins: {
       legend: {
         display: false
       }
+    },
+    interaction: {
+      intersect: false,
+      mode: "index"
     },
     scales: {
       x: {
@@ -96,10 +101,10 @@ function App() {
         //   text: 'Value'
         // },
         display: false,
+        // min: 20,
+        // max: 30,
         ticks: {
-          stepSize: 1,
-          min: 20,
-          max: 30
+          stepSize: 1
         }
       }
     }
