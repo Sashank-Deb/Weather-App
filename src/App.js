@@ -1,15 +1,15 @@
-import React, {useState} from "react";
-import {Line} from "react-chartjs-2";
+import React, {useState} from "react"
+import {Line} from "react-chartjs-2"
 const api = {
   key: "e72904ae768cb10890bd228d2f225dd2",
   base: "https://api.openweathermap.org/data/2.5/"
-};
+}
 
 function App() {
-  const [query, setQuery] = useState("");
-  const [weather, setWeather] = useState({});
-  const [daily, setDaily] = useState({});
-  const [data, setData] = useState({});
+  const [query, setQuery] = useState("")
+  const [weather, setWeather] = useState({})
+  const [daily, setDaily] = useState({})
+  const [data, setData] = useState({})
 
   const search = (evt) => {
     if (evt.key === "Enter") {
@@ -17,18 +17,18 @@ function App() {
         .then((res) => res.json())
         .then((result) => {
           if (result.cod !== "404") {
-            const lon = result.coord.lon;
-            const lat = result.coord.lat;
-            console.log("Latitude:", lat);
-            console.log("Longitude:", lon);
-            setQuery("");
+            const lon = result.coord.lon
+            const lat = result.coord.lat
+            console.log("Latitude:", lat)
+            console.log("Longitude:", lon)
+            setQuery("")
             fetch(
               `${api.base}onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&APPID=${api.key}`
             )
               .then((result1) => result1.json())
               .then((result1) => {
-                setDaily(result1);
-                console.log("Onecall API is:", result1);
+                setDaily(result1)
+                console.log("Onecall API is:", result1)
 
                 const data = {
                   labels: ["07h", "09h", "11h", "13h", "15h", "17h"],
@@ -62,15 +62,15 @@ function App() {
                     //     data: [result1.hourly[8].temp, result1.hourly[10].temp, result1.hourly[12].temp, result1.hourly[14].temp, result1.hourly[16].temp, result1.hourly[18].temp, result1.hourly[20].temp]
                     // }
                   ]
-                };
-                setData(data);
-              });
+                }
+                setData(data)
+              })
           }
-          setWeather(result);
-          console.log("Weather API is:", result);
-        });
+          setWeather(result)
+          console.log("Weather API is:", result)
+        })
     }
-  };
+  }
 
   const options = {
     responsive: true,
@@ -108,7 +108,7 @@ function App() {
         }
       }
     }
-  };
+  }
   const dateBuilder = (d) => {
     let months = [
       "January",
@@ -123,7 +123,7 @@ function App() {
       "October",
       "November",
       "December"
-    ];
+    ]
     let days = [
       "Sunday",
       "Monday",
@@ -132,89 +132,89 @@ function App() {
       "Thrusday",
       "Friday",
       "Saturday"
-    ];
+    ]
 
-    let day = days[d.getDay()];
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    let year = d.getFullYear().toString().substr(-2);
+    let day = days[d.getDay()]
+    let date = d.getDate()
+    let month = months[d.getMonth()]
+    let year = d.getFullYear().toString().substr(-2)
 
-    return `${day} | ${date} ${month} '${year}`;
-  };
+    return `${day} | ${date} ${month} '${year}`
+  }
   const dateBuilder1 = (d) => {
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let day = d.getDay();
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let day = d.getDay()
     if (day < 6) {
-      day = day + 1;
+      day = day + 1
     } else {
-      day = 0;
+      day = 0
     }
-    let day1 = days[day];
-    return `${day1}`;
-  };
+    let day1 = days[day]
+    return `${day1}`
+  }
   const dateBuilder2 = (d) => {
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let day = d.getDay();
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let day = d.getDay()
     if (day < 5) {
-      day = day + 2;
+      day = day + 2
     } else if (day > 5) {
-      day = day - 5;
+      day = day - 5
     } else if (day === 5) {
-      day = 0;
+      day = 0
     }
-    let day2 = days[day];
-    return `${day2}`;
-  };
+    let day2 = days[day]
+    return `${day2}`
+  }
   const dateBuilder3 = (d) => {
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let day = d.getDay();
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let day = d.getDay()
     if (day < 4) {
-      day = day + 3;
+      day = day + 3
     } else if (day > 4) {
-      day = day - 4;
+      day = day - 4
     } else if (day === 4) {
-      day = 0;
+      day = 0
     }
-    let day3 = days[day];
-    return `${day3}`;
-  };
+    let day3 = days[day]
+    return `${day3}`
+  }
   const dateBuilder4 = (d) => {
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let day = d.getDay();
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let day = d.getDay()
     if (day < 3) {
-      day = day + 4;
+      day = day + 4
     } else if (day > 3) {
-      day = day - 3;
+      day = day - 3
     } else if (day === 3) {
-      day = 0;
+      day = 0
     }
-    let day4 = days[day];
-    return `${day4}`;
-  };
+    let day4 = days[day]
+    return `${day4}`
+  }
   const dateBuilder5 = (d) => {
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let day = d.getDay();
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let day = d.getDay()
     if (day < 2) {
-      day = day + 5;
+      day = day + 5
     } else if (day > 2) {
-      day = day - 2;
+      day = day - 2
     } else if (day === 2) {
-      day = 0;
+      day = 0
     }
-    let day5 = days[day];
-    return `${day5}`;
-  };
+    let day5 = days[day]
+    return `${day5}`
+  }
   const dateBuilder6 = (d) => {
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let day = d.getDay();
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let day = d.getDay()
     if (day < 1) {
-      day = day + 6;
+      day = day + 6
     } else {
-      day = day - 1;
+      day = day - 1
     }
-    let day6 = days[day];
-    return `${day6}`;
-  };
+    let day6 = days[day]
+    return `${day6}`
+  }
 
   return (
     // <div className={
@@ -695,62 +695,21 @@ function App() {
                     <div className="weatherfooter">
                       <div className="weatherdetailsicon">
                         <svg
-                          width="20"
-                          height="20"
-                          className="w-icon"
-                          viewBox="0 0 20 20"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 20"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <g clipPath="url(#clip0)">
-                            <path
-                              d="M6.67163 15.8331V17.4997"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M6.67163 10.8331V12.4997"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M13.3383 15.8331V17.4997"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M13.3383 10.8331V12.4997"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M10.0049 17.4998V19.1664"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M10.0049 12.4998V14.1664"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M16.6716 13.8164C17.5477 13.4327 18.265 12.7594 18.7034 11.9094C19.1417 11.0593 19.2742 10.0844 19.0788 9.14823C18.8833 8.21204 18.3718 7.37158 17.63 6.76794C16.8882 6.16429 15.9613 5.8342 15.005 5.83307H13.955C13.6908 4.81017 13.1873 3.8647 12.486 3.07457C11.7848 2.28445 10.9057 1.6723 9.92142 1.28859C8.93711 0.90488 7.87571 0.760588 6.82469 0.86761C5.77367 0.974633 4.76313 1.3299 3.87636 1.90414C2.9896 2.47838 2.252 3.25514 1.72437 4.1704C1.19674 5.08567 0.894178 6.11322 0.841628 7.16837C0.789077 8.22351 0.988042 9.27604 1.42212 10.2392C1.8562 11.2024 2.51297 12.0486 3.33828 12.7081"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                          </g>
-                          <defs>
-                            <clipPath id="clip0">
-                              <rect width="20" height="20" fill="white" />
-                            </clipPath>
-                          </defs>
+                          <path
+                            d="M8.99563 2L13.9481 6.68769C14.9275 7.61413 15.5947 8.79471 15.8652 10.0801C16.1356 11.3655 15.9973 12.6979 15.4676 13.9088C14.9379 15.1198 14.0407 16.1548 12.8895 16.8831C11.7382 17.6113 10.3847 18 9 18C7.61534 18 6.26178 17.6113 5.11053 16.8831C3.95929 16.1548 3.06209 15.1198 2.53241 13.9088C2.00273 12.6979 1.86437 11.3655 2.13484 10.0801C2.40531 8.79471 3.07245 7.61413 4.05188 6.68769L8.99563 2Z"
+                            fill="white"
+                            stroke="white"
+                            strokeOpacity="0.34"
+                            strokeWidth="4"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       </div>
                       <div className="weatherdetails">
@@ -902,7 +861,7 @@ function App() {
         )}
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
