@@ -2,7 +2,7 @@
 
 A simple, beautiful and straightforward weather app with dark mode interface for enjoyable night time experiences and with hourly and daily forecast of weather made using React js, Firebase, Figma for prototyping and One weather API.
 
-Check out the Web App: https://haze-weather.web.app/ 
+Check out the Web App: https://haze-weather.web.app/ <br/>
 (Open in mobile devices for the best experience)
 
 ![Sunny Day](https://user-images.githubusercontent.com/69194538/128396973-d8dc02a8-a569-4228-914d-e60400c252af.png)
