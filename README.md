@@ -1,4 +1,4 @@
-## "Haze Weather" Mobile App
+## "Haze Weather" [Mobile App](https://sashank-deb.github.io/Weather-App/)
 
 A simple, beautiful and straightforward weather app with dark mode interface for enjoyable night time experiences and with hourly and daily forecast of weather made using React js, Firebase, Figma for prototyping and One weather API.
 
