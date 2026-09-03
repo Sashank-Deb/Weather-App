@@ -1,18 +1,9 @@
 ## ["Haze Weather" Mobile App](https://sashank-deb.github.io/Weather-App/)
 
-A responsive weather app with a dark-mode interface, current conditions, and a five-day forecast. It is built with React and OpenWeather.
+A simple, beautiful and straightforward weather app with dark mode interface for enjoyable night time experiences and with hourly and daily forecast of weather made using React js, Firebase, Figma for prototyping and One weather API.
 
 Check out the Web App: https://haze-weather.web.app/ <br/>
-(Works across phones, tablets, and desktop screens.)
-
-## Setup
-
-1. Create an OpenWeather API key at [OpenWeather](https://openweathermap.org/api).
-2. Copy `.env.example` to `.env.local`.
-3. Set `REACT_APP_OPENWEATHER_API_KEY` to your key.
-4. Install dependencies with `npm install`, then run `npm start`.
-
-The app uses OpenWeather's Current Weather and 5 day / 3 hour Forecast APIs, which are available on its free tier. API keys are intentionally kept out of source control.
+(Open in mobile devices for the best experience)
 
 ![Sunny Day](https://user-images.githubusercontent.com/69194538/128396973-d8dc02a8-a569-4228-914d-e60400c252af.png)
 ![Clear Sky](https://user-images.githubusercontent.com/69194538/128396905-64673a0c-6143-4de8-ad7b-67a2775cb0c6.png)
