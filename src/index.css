@@ -8,12 +8,17 @@ body {
   font-family: "Roboto", sans-serif;
   src: url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap");
   background: #141414;
-  height: 100vh;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 #root {
   height: 100%;
   padding: 25px;
+  border-radius: 15px;
 }
 
 .app {
@@ -34,25 +39,25 @@ body {
 
 .sun {
   width: 200%;
-  margin-top: -130%;
+  margin-top: -140%;
   margin-left: -50%;
   filter: drop-shadow(0px 10px 7px rgb(0 0 0 / 0.9));
 }
 .dark {
   width: 200%;
-  margin-top: -130%;
+  margin-top: -140%;
   margin-left: -55%;
   filter: drop-shadow(0px 10px 7px rgb(0 0 0 / 0.9));
 }
 .cloud {
   width: 200%;
-  margin-top: -130%;
-  margin-left: -50%;
+  margin-top: -140%;
+  margin-left: -80%;
   filter: drop-shadow(0px 10px 7px rgb(0 0 0 / 0.9));
 }
 .rain {
   width: 200%;
-  margin-top: -130%;
+  margin-top: -140%;
   margin-left: -25%;
   filter: drop-shadow(0px 10px 7px rgb(0 0 0 / 0.9));
 }
@@ -220,5 +225,24 @@ input:focus::placeholder {
   font-size: 13px;
   font-weight: 600;
   opacity: 0.1;
+
+}
+
+/* Mobile devices (phones, up to 480px) */
+@media (max-width: 480px) {
+  #root{
+    padding: 0px;
+    border-radius: 0px;
+  }
+  .app {
+    border-radius: 0px;
+  }
+
+  .sun ,
+  .dark ,
+  .cloud ,
+  .rain {
+  margin-top: -120%;
+}
 
 }
