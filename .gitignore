@@ -22,9 +22,8 @@ pnpm-debug.log*
 # Diagnostic reports
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
-# Optional: Build outputs (Uncomment if you use TypeScript/Bundlers)
-# dist/
-# build/
+# Build outputs
+build/
 
 # OS files
 .DS_Store

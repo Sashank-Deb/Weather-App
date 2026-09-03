@@ -1,7 +1,7 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import {Line} from "react-chartjs-2"
 const api = {
-  key: "e72904ae768cb10890bd228d2f225dd2",
+  key: process.env.REACT_APP_WEATHER_API_KEY,
   base: "https://api.openweathermap.org/data/2.5/"
 }
 
@@ -10,6 +10,65 @@ function App() {
   const [weather, setWeather] = useState({})
   const [daily, setDaily] = useState({})
   const [data, setData] = useState({})
+
+  // --- shared helper: fetch + set weather/data from lat/lon ---
+  const fetchWeatherByCoords = (lat, lon) => {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&cnt=7&units=metric&appid=${api.key}`
+    )
+      .then((result1) => result1.json())
+      .then((result1) => {
+        setDaily(result1)
+        setWeather(result1)
+        console.log("Onecall API is:", result1)
+
+        const chartData = {
+          labels: ["07h", "09h", "11h", "13h", "15h", "17h"],
+          datasets: [
+            {
+              label: "Temperature",
+              fill: true,
+              tension: 0.4,
+              backgroundColor: ["rgba(0,122,255,0.2)"],
+              borderColor: ["rgb(0,122,255)"],
+              borderWidth: 3,
+              pointRadius: 6,
+              pointBackgroundColor: ["rgba(0,122,255,1)"],
+              pointBorderColor: ["rgba(0,122,255,0.2)"],
+              pointBorderWidth: 5,
+              data: [
+                result1.main.temp,
+                result1.main.temp,
+                result1.main.temp,
+                result1.main.temp,
+                result1.main.temp,
+                result1.main.temp,
+                result1.main.temp,
+              ]
+            }
+          ]
+        }
+        setData(chartData)
+      })
+  }
+
+  // --- run once on first load: get current position and load its weather ---
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const {latitude, longitude} = position.coords
+          fetchWeatherByCoords(latitude, longitude)
+        },
+        (error) => {
+          console.log("Geolocation error:", error)
+        }
+      )
+    } else {
+      console.log("Geolocation not supported by this browser.")
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const search = (evt) => {
     if (evt.key === "Enter") {
@@ -23,7 +82,7 @@ function App() {
             console.log("Longitude:", lon)
             setQuery("")
             fetch(
-              `${api.base}onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&APPID=${api.key}`
+              `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&cnt=7&units=metric&appid=${api.key}`
             )
               .then((result1) => result1.json())
               .then((result1) => {
@@ -45,22 +104,15 @@ function App() {
                       pointBorderColor: ["rgba(0,122,255,0.2)"],
                       pointBorderWidth: 5,
                       data: [
-                        result1.hourly[7].temp,
-                        result1.hourly[9].temp,
-                        result1.hourly[11].temp,
-                        result1.hourly[13].temp,
-                        result1.hourly[15].temp,
-                        result1.hourly[17].temp,
-                        result1.hourly[19].temp
+                        result1.main.temp,
+                        result1.main.temp,
+                        result1.main.temp,
+                        result1.main.temp,
+                        result1.main.temp,
+                        result1.main.temp,
+                        result1.main.temp,
                       ]
                     }
-                    // {
-                    //   label: 'Data 2',
-                    //     backgroundColor: ['rgba(255, 99, 132, 0.9)'],
-                    //     borderColor: ['rgb(255, 99, 132)'],
-                    //     borderWidth: 3,
-                    //     data: [result1.hourly[8].temp, result1.hourly[10].temp, result1.hourly[12].temp, result1.hourly[14].temp, result1.hourly[16].temp, result1.hourly[18].temp, result1.hourly[20].temp]
-                    // }
                   ]
                 }
                 setData(data)
@@ -648,7 +700,7 @@ function App() {
             onKeyPress={search}
           />
         </div>
-        {typeof daily.current !== "undefined" ? (
+        {typeof weather.main !== "undefined" ? (
           <div>
             <div className="location-box">
               <div className="location">
@@ -676,13 +728,13 @@ function App() {
                     </div>
                     <div className="weather-box">
                       <div className="minmax">
-                        {Math.round(daily.daily[0].temp.min)}
-                        {"°"} | {Math.round(daily.daily[0].temp.max)}
+                        {Math.round(weather.main.temp_min)}
+                        {"°"} | {Math.round(weather.main.temp_max)}
                         {"°"}
                       </div>
                       <div className="temp">
                         {Math.round(weather.main.temp)}
-                        {"°"}
+                        <span style={{ color: 'rgb(238 141 141)'}}>°</span>
                       </div>
                       <div className="weather">
                         {weather.weather[0].description
@@ -713,16 +765,16 @@ function App() {
                         </svg>
                       </div>
                       <div className="weatherdetails">
-                        {daily.daily[0].humidity}% | UV{" "}
-                        {Math.round(daily.current.uvi)}
+                        {weather.main.humidity}% | Feels Like{" "}
+                        {Math.round(weather.main.feels_like)}
                       </div>
                     </div>
 
-                    <div className="chart">
+                    {/* <div className="chart">
                       <Line data={data} options={options}></Line>
-                    </div>
+                    </div> */}
 
-                    <div className="week">
+                    {/* <div className="week">
                       <div className="weekbar">
                         <div className="day">{dateBuilder1(new Date())}</div>
                         <img
@@ -819,12 +871,7 @@ function App() {
                           {"°"}
                         </div>
                       </div>
-                    </div>
-
-                    <div className="footer">
-                      Powered by One weather <br />
-                      Copyright © 2021 Sashank Deb
-                    </div>
+                    </div> */}
                   </div>
                 ) : (
                   <div>
@@ -860,6 +907,10 @@ function App() {
           </div>
         )}
       </main>
+        <div className="footer">
+            Powered by One weather <br />
+            Copyright © 2021 Sashank Deb
+        </div>
     </div>
   )
 }
