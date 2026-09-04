@@ -8,6 +8,11 @@ body {
   font-family: "Roboto", sans-serif;
   src: url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap");
   background: #141414;
+  background-size: cover;
+  background-image: url("./background.svg");
+  background-size: cover;
+  background-blend-mode: difference;
+  backdrop-filter: grayscale(50%) blur(10px);
 }
 
 html,
@@ -17,8 +22,6 @@ body {
 
 #root {
   height: 100%;
-  padding: 25px;
-  border-radius: 15px;
 }
 
 .app {
@@ -27,9 +30,10 @@ body {
   background-position: bottom;
   transition: 0.4 ease;
   overflow-x: hidden;
-  background: #141414;
-  border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background: #141414de;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.08), 
+    0 4px 24px rgba(0, 0, 0, 0.5);
   max-width: 650px;
   margin: auto;
   height: 100%;
@@ -53,6 +57,12 @@ body {
   width: 200%;
   margin-top: -140%;
   margin-left: -80%;
+  filter: drop-shadow(0px 10px 7px rgb(0 0 0 / 0.9));
+}
+.sunnyClouds {
+    width: 100%;
+    margin-top: -40%;
+    margin-left: 0;
   filter: drop-shadow(0px 10px 7px rgb(0 0 0 / 0.9));
 }
 .rain {
@@ -91,7 +101,7 @@ main {
   text-align: left;
   border: none;
   outline: none;
-  background-color: #292929;
+  background-color: #2929299e;
   border-radius: 20px;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.7);
   font-weight: 700;
@@ -228,21 +238,74 @@ input:focus::placeholder {
 
 }
 
-/* Mobile devices (phones, up to 480px) */
-@media (max-width: 480px) {
-  #root{
-    padding: 0px;
-    border-radius: 0px;
-  }
-  .app {
-    border-radius: 0px;
+
+
+/* Mobile devices (phones, up to 900px) */
+@media (min-width: 900px) {
+  .app{
+    transform: scale(1.2);
   }
 
-  .sun ,
-  .dark ,
-  .cloud ,
-  .rain {
-  margin-top: -150%;
-}
+  .footer {
+    display: none;
+  }
+  #root {
+    display: flex;
+    padding: 25px;
+    border-radius: 15px;
+  }
+
+  main{
+    padding: 0;
+  }
+
+  section{
+    padding: 50px 40px;
+    width: 50%;
+  }
+
+  .date{
+    margin-top: 0px;
+  }
+
+  .app{
+    height: auto;
+    max-width: 700px;
+    width: 100%;
+    border-radius: 15px;
+  }
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .cloud {
+    margin-top: -95%;
+    margin-left: -70%;
+  }
+
+  .sun, .dark {
+    margin-top: -35%;
+    margin-bottom: -35%;
+    margin-left: -90%;
+  }
+
+  .dark{
+    transform: rotate(90deg);
+  }
+
+  .rain{
+    margin-top: -80%;
+    margin-left: -44%;
+  }
+
+  .sunnyClouds {
+    width: 140%;
+    margin-top: -30%;
+    margin-left: -10%;
+  }
 
 }
+
+
